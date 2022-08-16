@@ -191,7 +191,7 @@ async def log_requests(request: Request, call_next):
 
 @app.get("/today/weather")
 async def Load_today_weather_params():
-    id, tdatetime, precipitation, temp_min, temp_max, wind, real_weather = get_today_weather_param()
+    id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather = get_today_weather_param()
     # logger.info(f"User {current_user.username} load current weather data at {tdatetime}")
     
     result = {}
@@ -206,11 +206,11 @@ async def Load_today_weather_params():
 
 
 @app.post("/db/record/today")
-async def Store_today_weather(key_id, tdatetime, precipitation, temp_min, temp_max, wind, real_weather,
+async def Store_today_weather(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather,
                     
                     ):
     try:
-        save_params_into_db(key_id, tdatetime, precipitation, temp_min, temp_max, wind, real_weather)
+        save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather)
     except Exception as e:
         logger.error(f"Failed to save weather data at {tdatetime}")
         print(e)
