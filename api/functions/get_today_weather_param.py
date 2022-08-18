@@ -7,7 +7,7 @@ def get_today_weather_param():
     data = requests.get(url).json()
     today = data['daily'][0]
 
-    id = today['dt']
+    key_id = today['dt']
     tdatetime = datetime.fromtimestamp(today['dt'])
 
     precipitation = 0;
@@ -20,7 +20,17 @@ def get_today_weather_param():
     temp_max = today['temp']['max']
     wind = today['wind_speed']
     real_weather = today['weather'][0]['main']
-    return id, tdatetime, precipitation, temp_min, temp_max, wind, real_weather;
+
+    result = {}
+    result['key_id'] = key_id;
+    result['tdatetime'] = tdatetime
+    result['precipitation'] = precipitation
+    result['temp_min'] = temp_min
+    result['temp_max'] = temp_max
+    result['wind'] = wind
+    result['real_weather'] = real_weather
+
+    return result;
 
 # today = get_today_weather_param()
 # today
