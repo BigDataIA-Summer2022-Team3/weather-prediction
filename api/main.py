@@ -191,12 +191,12 @@ async def log_requests(request: Request, call_next):
 
 @app.get("/today/weather")
 async def Load_today_weather_params():
-    # logger.info(f"User {current_user.username} load current weather data at {tdatetime}")
     return get_today_weather_param();  
 
 
 @app.post("/db/record/today")
-async def Store_today_weather(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather,
+async def Store_today_weather(key_id: str, tdatetime: str, precipitation: str, 
+                    temp_max: str, temp_min: str, wind: str, real_weather: str,
                     
                     ):
     try:

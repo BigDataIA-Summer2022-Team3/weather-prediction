@@ -16,8 +16,8 @@ def get_today_weather_param():
     if('snow' in today.keys()):
         precipitation = precipitation + today['snow']
 
-    temp_min = today['temp']['min']
     temp_max = today['temp']['max']
+    temp_min = today['temp']['min']
     wind = today['wind_speed']
     real_weather = today['weather'][0]['main']
 
@@ -25,8 +25,8 @@ def get_today_weather_param():
     result['key_id'] = key_id;
     result['tdatetime'] = tdatetime
     result['precipitation'] = precipitation
-    result['temp_min'] = temp_min
     result['temp_max'] = temp_max
+    result['temp_min'] = temp_min
     result['wind'] = wind
     result['real_weather'] = real_weather
 
