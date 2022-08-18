@@ -17,21 +17,34 @@ with DAG(
     wind = 0.0,
     real_weather = ''
 
-    def request():
+    def request_daily_data(ti):
         data = requests.get("https://damg-weather.herokuapp.com/today/weather").json() #fastapi url
         # data = requests.get("http://172.19.253.187:8000/today/weather").json() #fastapi url
         print(data)
         print('here####################################################')
-        key_id = data['key_id']
-        tdatetime = data['tdatetime']
-        precipitation = data['precipitation']
-        temp_max = ['temp_max']
-        temp_min = ['temp_min']
-        wind = ['wind']
-        real_weather = ['real_weather']
+        request_result = {}
+        request_result['key_id'] = data['key_id']
+        request_result['tdatetime'] = data['tdatetime']
+        request_result['precipitation'] = data['precipitation']
+        request_result['temp_max'] = ['temp_max']
+        request_result['temp_min'] = ['temp_min']
+        request_result['wind'] = ['wind']
+        request_result['real_weather'] = ['real_weather']
+        ti.xcom_push(key='request_result', value=request_result)
+        print(request_result)
 
 
-    def save():
+    def save_into_db(ti):
+        request_result = ti.xcom_pull(task_ids='request_task', key='request_result')
+        print(request_result)
+        request_result['key_id'] = key_id
+        request_result['tdatetime'] = tdatetime
+        request_result['precipitation'] = precipitation
+        request_result['temp_max'] = temp_max
+        request_result['temp_min'] = temp_min
+        request_result['wind'] = wind 
+        request_result['real_weather'] = real_weather
+        
         testnum = requests.get("https://damg-weather.herokuapp.com/db/record/today?key_id={key_id}&tdatetime={tdatetime}&precipitation={precipitation}&temp_max={temp_max}&temp_min={temp_min}&wind={wind}&real_weather={real_weather}") #fastapi url
         # requests.get("http://172.19.253.187:8000/db/record/today?key_id={key_id}&tdatetime={tdatetime}&precipitation={precipitation}&temp_max={temp_max}&temp_min={temp_min}&wind={wind}&real_weather={real_weather}")
         print(testnum)
@@ -39,12 +52,12 @@ with DAG(
 
     request_task = PythonOperator(
         task_id="request_task",
-        python_callable=request
+        python_callable=request_daily_data
     )
     
     save_task = PythonOperator(
         task_id="save_task",
-        python_callable=save
+        python_callable=save_into_db
     )
     
     request_task >> save_task
