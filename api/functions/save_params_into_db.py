@@ -1,7 +1,7 @@
 import pymysql
 from datetime import datetime as dt
-from dbconfig import funct
-# from functions.dbconfig import funct
+# from dbconfig import funct
+from functions.dbconfig import funct
 
 def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather):
     # 上传数据到本地库
@@ -38,5 +38,5 @@ def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wi
         print(key_id)
         return key_id
 
-utctimenow = dt.utcnow()
-save_params_into_db('test05', utctimenow, 0.3, 27, 16, 10, 'clean')
+# utctimenow = dt.utcnow()
+# save_params_into_db('test05', utctimenow, 0.3, 27, 16, 10, 'clean')
