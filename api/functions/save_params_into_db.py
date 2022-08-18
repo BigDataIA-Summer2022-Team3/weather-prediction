@@ -1,5 +1,7 @@
 import pymysql
+from datetime import datetime as dt
 from functions.dbconfig import funct
+# from dbconfig import funct
 
 def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather):
     # 上传数据到本地库
@@ -23,9 +25,8 @@ def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wi
         print("Prepare to insert...")
         c.execute(sql)
         testreturn = c.lastrowid
-        print("Inserted!")
-
         con.commit() # 若操作为增删改则需要提交数据
+        print("Inserted!")
 
     except:
         print("Something went wrong")
@@ -35,5 +36,6 @@ def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wi
         print(testreturn)
         return testreturn
 
-# utctimenow = dt.utcnow()
-# save_params_into_db('test06', utctimenow, 0.3, 27, 16, 10, 'clean')
+utctimenow = dt.utcnow()
+save_params_into_db('test02', utctimenow, 0.3, 27, 16, 10, 'clean')
+
