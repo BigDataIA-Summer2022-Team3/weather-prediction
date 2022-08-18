@@ -26,10 +26,10 @@ with DAG(
         request_result['key_id'] = data['key_id']
         request_result['tdatetime'] = data['tdatetime']
         request_result['precipitation'] = data['precipitation']
-        request_result['temp_max'] = ['temp_max']
-        request_result['temp_min'] = ['temp_min']
-        request_result['wind'] = ['wind']
-        request_result['real_weather'] = ['real_weather']
+        request_result['temp_max'] = data['temp_max']
+        request_result['temp_min'] = data['temp_min']
+        request_result['wind'] = data['wind']
+        request_result['real_weather'] = data['real_weather']
         ti.xcom_push(key='request_result', value=request_result)
         print(request_result)
 
@@ -37,15 +37,15 @@ with DAG(
     def save_into_db(ti):
         request_result = ti.xcom_pull(task_ids='request_task', key='request_result')
         print(request_result)
-        request_result['key_id'] = key_id
-        request_result['tdatetime'] = tdatetime
-        request_result['precipitation'] = precipitation
-        request_result['temp_max'] = temp_max
-        request_result['temp_min'] = temp_min
-        request_result['wind'] = wind 
-        request_result['real_weather'] = real_weather
-        
-        testnum = requests.get("https://damg-weather.herokuapp.com/db/record/today?key_id={key_id}&tdatetime={tdatetime}&precipitation={precipitation}&temp_max={temp_max}&temp_min={temp_min}&wind={wind}&real_weather={real_weather}") #fastapi url
+        key_id = request_result['key_id'] 
+        tdatetime = request_result['tdatetime']
+        precipitation = request_result['precipitation']
+        temp_max = request_result['temp_max']
+        temp_min = request_result['temp_min']
+        wind = request_result['wind']
+        real_weather = request_result['real_weather']
+
+        testnum = requests.get(f"https://damg-weather.herokuapp.com/db/record/today?key_id={key_id}&tdatetime={tdatetime}&precipitation={precipitation}&temp_max={temp_max}&temp_min={temp_min}&wind={wind}&real_weather={real_weather}") #fastapi url
         # requests.get("http://172.19.253.187:8000/db/record/today?key_id={key_id}&tdatetime={tdatetime}&precipitation={precipitation}&temp_max={temp_max}&temp_min={temp_min}&wind={wind}&real_weather={real_weather}")
         print(testnum)
         print('############################################')
