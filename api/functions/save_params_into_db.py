@@ -25,7 +25,6 @@ def save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wi
         print("Prepare to insert...")
         c.execute(sql)
         # testreturn = c.lastrowid
-        print("till now")
         con.commit() # 若操作为增删改则需要提交数据
         print("Inserted!")
 

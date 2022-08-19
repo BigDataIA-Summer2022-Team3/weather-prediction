@@ -33,4 +33,4 @@ def get_today_weather_param():
     return result;
 
 # today = get_today_weather_param()
-# today
+# print(today)
