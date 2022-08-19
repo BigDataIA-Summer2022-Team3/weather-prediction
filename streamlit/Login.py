@@ -5,7 +5,7 @@ import streamlit_authenticator as stauth
 import pymysql
 import requests
 import logging
-# from dbconfig import funct
+from dbconfig import funct
 
 #need "pip install streamlit-authenticator==0.1.5"
 
@@ -29,7 +29,7 @@ name, authentication_status, username = authenticator.login("Login" , "main")
 
 
 def load_token(username): #password if has
-    url = "https://damg-team3-lookout.herokuapp.com/token"
+    url = "https://damg-weather.herokuapp.com/token"
 
     header = {
         "accept": "application/json",
@@ -54,9 +54,9 @@ if st.session_state["authentication_status"]:
     # authenticator.logout('Logout', 'sidebar')
     st.markdown(f'# Welcome *{st.session_state["name"]}*')
 
-    Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
-    # Host, User, Password = funct()
-    con = pymysql.connect(host = Host, user = User, password = Password, database = 'lemon', charset = "utf8")
+    # Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
+    Host, User, Password = funct()
+    con = pymysql.connect(host = Host, user = User, password = Password, database = 'damg', charset = "utf8")
     c = con.cursor()
     c.execute('select * from user_table where username = "%s"' % st.session_state.username)
     datainfo = c.fetchall()
@@ -65,7 +65,7 @@ if st.session_state["authentication_status"]:
     load_token(username) #dbpassword if has
     logging.debug(f'User {username} log in')
 
-    
+
     
 elif st.session_state["authentication_status"] == False:
     st.error('Username/password is incorrect')    
@@ -73,3 +73,5 @@ elif st.session_state["authentication_status"] == False:
 elif st.session_state["authentication_status"] == None:
     st.warning('Please enter your username and password')
     st.session_state["token"] = ""
+
+st.session_state

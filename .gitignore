@@ -101,3 +101,5 @@ logs.txt
 docker
 
 .venv
+
+venv
