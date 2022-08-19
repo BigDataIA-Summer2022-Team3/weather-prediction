@@ -151,7 +151,7 @@ if st.session_state["authentication_status"]:
 
             # prcp graph
             if(prcp_num != 0):
-                st.markdown('## Prcp')
+                st.markdown('## Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': date_col,
                     'precipitation(mm)': day_prcp
@@ -160,7 +160,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
             # wind graph
-            st.markdown('## wind')
+            st.markdown('## Average wind speed')
             wind_df = pd.DataFrame({
                 'date': date_col,
                 'wind(m/s)': day_wind
@@ -272,7 +272,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[0]['date'],
                     'precipitation(mm)': month_arr[0]['prcp']
@@ -296,7 +296,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[1]['date'],
                     'precipitation(mm)': month_arr[1]['prcp']
@@ -320,7 +320,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[2]['date'],
                     'precipitation(mm)': month_arr[2]['prcp']
@@ -344,7 +344,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[3]['date'],
                     'precipitation(mm)': month_arr[3]['prcp']
@@ -368,7 +368,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[4]['date'],
                     'precipitation(mm)': month_arr[4]['prcp']
@@ -377,7 +377,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[4]['hesttemp']) + '°C and the lowest is ' + str(month_arr[4]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[4]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[4]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[4]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[4]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[4]['totalprcp']) + 'mm.')
 
 
@@ -392,7 +392,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[5]['date'],
                     'precipitation(mm)': month_arr[5]['prcp']
@@ -401,7 +401,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[5]['hesttemp']) + '°C and the lowest is ' + str(month_arr[5]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[5]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[5]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[5]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[5]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[5]['totalprcp']) + 'mm.')
 
 
@@ -416,7 +416,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[6]['date'],
                     'precipitation(mm)': month_arr[6]['prcp']
@@ -425,7 +425,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[6]['hesttemp']) + '°C and the lowest is ' + str(month_arr[6]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[6]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[6]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[6]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[6]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[6]['totalprcp']) + 'mm.')
 
 
@@ -440,7 +440,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[7]['date'],
                     'precipitation(mm)': month_arr[7]['prcp']
@@ -449,7 +449,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[7]['hesttemp']) + '°C and the lowest is ' + str(month_arr[7]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[7]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[7]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[7]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[7]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[7]['totalprcp']) + 'mm.')
 
 
@@ -464,7 +464,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[8]['date'],
                     'precipitation(mm)': month_arr[8]['prcp']
@@ -473,7 +473,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[8]['hesttemp']) + '°C and the lowest is ' + str(month_arr[8]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[8]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[8]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[8]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[8]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[8]['totalprcp']) + 'mm.')
 
 
@@ -488,7 +488,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[9]['date'],
                     'precipitation(mm)': month_arr[9]['prcp']
@@ -497,7 +497,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[9]['hesttemp']) + '°C and the lowest is ' + str(month_arr[9]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[9]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[9]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[9]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[9]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[9]['totalprcp']) + 'mm.')
 
 
@@ -512,7 +512,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[10]['date'],
                     'precipitation(mm)': month_arr[10]['prcp']
@@ -521,7 +521,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[10]['hesttemp']) + '°C and the lowest is ' + str(month_arr[10]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[10]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[10]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[10]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[10]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[10]['totalprcp']) + 'mm.')
 
 
@@ -536,7 +536,7 @@ if st.session_state["authentication_status"]:
                 temp_df = temp_df.rename(columns={'date':'index'}).set_index('index')
                 st.line_chart(temp_df)
 
-                st.markdown('### Prcp')
+                st.markdown('### Precipitation')
                 prcp_df = pd.DataFrame({
                     'date': month_arr[11]['date'],
                     'precipitation(mm)': month_arr[11]['prcp']
@@ -545,7 +545,7 @@ if st.session_state["authentication_status"]:
                 st.bar_chart(prcp_df)
 
                 st.write('This month highest temperature is ' + str(month_arr[11]['hesttemp']) + '°C and the lowest is ' + str(month_arr[11]['lesttemp']) + '°C.')
-                st.write('The average higest temperature is ' + str(month_arr[11]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[11]['ave_ltemp']) + '°C.')
+                st.write('The average highest temperature is ' + str(month_arr[11]['ave_htemp']) + '°C and the average lowest is ' + str(month_arr[11]['ave_ltemp']) + '°C.')
                 st.write('The total precipitation is ' + str(month_arr[11]['totalprcp']) + 'mm.')            
 
     

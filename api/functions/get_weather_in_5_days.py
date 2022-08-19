@@ -1,7 +1,6 @@
 import requests
 
 from functions.predict_weather import predict_weather
-# from predict_weather import predict_weather
 
 def get_weather_in_5_days(lat:int= None, lon:int= None, ):
     def_lat = 47
