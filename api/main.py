@@ -16,6 +16,7 @@ from functions.get_weather_in_5_days import get_weather_in_5_days
 from functions.get_past_one_week_weather import get_past_one_week_weather
 from functions.get_today_weather_param import get_today_weather_param
 from functions.save_params_into_db import save_params_into_db
+from functions.save_log_into_db import save_log_into_db
 
 logging.config.fileConfig('log/logging.conf')
 logger = logging.getLogger(__name__)
@@ -90,7 +91,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
-
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -194,8 +194,17 @@ async def log_requests(request: Request, call_next):
 async def Store_today_weather(key_id: str, tdatetime: str, precipitation: str, 
                     temp_max: str, temp_min: str, wind: str, real_weather: str,
                     ):
+    """
+    This function will call save_params_into_db() function
+    The function is used to upload daily meteorological data to MySQL.
+    Function get key_id, datetime, precipitation, highest temp, lowest temp, wind and reall weather, 
+        then use sql code to upload data to MySQL
+    """
     try:
         save_params_into_db(key_id, tdatetime, precipitation, temp_max, temp_min, wind, real_weather)
+        date = datetime.today() 
+        inf = logger.info(f"username='airflow'; save today weather at {date}")
+        save_log_into_db(f"username='airflow'; save today weather at {date}")
     except Exception as e:
         logger.error(f"Failed to save weather data at {tdatetime}")
         print(e)
@@ -206,17 +215,30 @@ async def Store_today_weather(key_id: str, tdatetime: str, precipitation: str,
 
 @app.get("/today/weather")
 async def Load_today_weather_params():
+    """
+    This function will call get_today_weather_param() function
+    we set a timily dag in airflow, every day the dag will call this function to get the meteorological data from OpenAPI 
+    """
     result = get_today_weather_param()
     date = datetime.today() 
-    logger.info(f"Load_today_weather at {date}")
+    inf = logger.info(f"username='airflow'; Load_today_weather at {date}")
+    save_log_into_db(f"username='airflow'; Load_today_weather at {date}")
     return result
 
 
 @app.get("/last7days/weather")
 async def Get_last_one_week_weather(current_user: User = Depends(get_current_active_user)):
+    """
+    This function will call get_past_one_week_weather() function
+    The function will get past 7 days meteorological data from MySQL and return them
+    user can use streamlit to call this function, and it will return last 7 days' precipitation, temp_max, temp_min, wind
+    """
     try:
         date = datetime.today()
-        logger.info(f"User {current_user} retrieve past one week weather at {date}")
+        fullstr = str(current_user)
+        name = fullstr.split(' ')[0]
+        logger.info(f"{name}; retrieve past one week weather at {date}")
+        save_log_into_db(f"{name}; retrieve past one week weather at {date}")
         result = get_past_one_week_weather()
     except Exception as e:
         logger.warning(e)
@@ -225,21 +247,35 @@ async def Get_last_one_week_weather(current_user: User = Depends(get_current_act
 
 @app.get("/predict/5days")
 async def Get_and_Predict_weather_in_5_days(current_user: User = Depends(get_current_active_user)):
+    """
+    This function will call get_weather_in_5_days() function
+    The function will get next 5 days meteorological data and analyze the weather, then return those meteorological data and weather
+    """
     try:
         result = get_weather_in_5_days()
         date = datetime.today()
-        logger.info(f"User {current_user} get predicted weather in 5 days at {date}")
+        fullstr = str(current_user)
+        name = fullstr.split(' ')[0]
+        inf = logger.info(f"{name}; get predicted weather in 5 days at {date}")
+        save_log_into_db(f"{name}; get predicted weather in 5 days at {date}")
     except Exception as e:
         logger.warning(e)
     return result
 
 
 @app.get("/history")
-async def Load_history_weather_in_one_year(input_year:int):
+async def Load_history_weather_in_one_year(input_year:int, current_user: User = Depends(get_current_active_user)):
+    """
+    This function will call load_history_weather(), it need input an int as Year
+    The function will search specified year in MySQL and return the year data as a dictionary
+    """
     try:
         result = load_history_weather(input_year)
         date = datetime.today() 
-        logger.info(f"{date} Load history weather in year {input_year}")
+        fullstr = str(current_user)
+        name = fullstr.split(' ')[0]
+        inf = logger.info(f"{name}; Load history weather in year {input_year} at {date}")
+        save_log_into_db(f"{name}; Load history weather in year {input_year} at {date}")
     except Exception as e:
         logger.warning(e)
     return result
