@@ -54,8 +54,8 @@ if st.session_state["authentication_status"]:
     # authenticator.logout('Logout', 'sidebar')
     st.markdown(f'# Welcome *{st.session_state["name"]}*')
 
-    # Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
-    Host, User, Password = funct()
+    Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
+    # Host, User, Password = funct()
     con = pymysql.connect(host = Host, user = User, password = Password, database = 'damg', charset = "utf8")
     c = con.cursor()
     c.execute('select * from user_table where username = "%s"' % st.session_state.username)
