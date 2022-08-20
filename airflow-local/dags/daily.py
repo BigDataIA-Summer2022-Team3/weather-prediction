@@ -7,7 +7,7 @@ with DAG(
     dag_id='get_weather_and_upload_dag',
     schedule_interval='0 5 * * *',
     start_date=datetime(2022, 8, 10),
-    tags='Daily_read_weather',
+    tags=['Daily_read_weather'],
 ) as dag:
     key_id = '',
     tdatetime = '',

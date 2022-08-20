@@ -5,7 +5,7 @@ import streamlit_authenticator as stauth
 import pymysql
 import requests
 import logging
-from dbconfig import funct
+# from dbconfig import funct
 
 #need "pip install streamlit-authenticator==0.1.5"
 
@@ -54,8 +54,8 @@ if st.session_state["authentication_status"]:
     # authenticator.logout('Logout', 'sidebar')
     st.markdown(f'# Welcome *{st.session_state["name"]}*')
 
-    # Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
-    Host, User, Password = funct()
+    Host, User, Password = st.secrets["Host"] , st.secrets["User"] , st.secrets["Password"]
+    # Host, User, Password = funct()
     con = pymysql.connect(host = Host, user = User, password = Password, database = 'damg', charset = "utf8")
     c = con.cursor()
     c.execute('select * from user_table where username = "%s"' % st.session_state.username)
