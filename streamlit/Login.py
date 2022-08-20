@@ -5,7 +5,7 @@ import streamlit_authenticator as stauth
 import pymysql
 import requests
 import logging
-from dbconfig import funct
+# from dbconfig import funct
 
 #need "pip install streamlit-authenticator==0.1.5"
 
